@@ -13,5 +13,5 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public interface GameRepository extends JpaRepository<Game, Integer> {
-
+    boolean existsByTitleAndPlatform(String title, String platform);
 }

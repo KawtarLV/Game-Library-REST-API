@@ -23,6 +23,10 @@ public class GameService {
     }
 
     public Game save(Game game) {
+        boolean exists = gameRepository.existsByTitleAndPlatform(game.getTitle(), game.getPlatform());
+        if (exists) {
+            throw new IllegalArgumentException("A game with the same title and platform already exists.");
+        }
         return gameRepository.save(game);
     }
 

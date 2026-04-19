@@ -43,9 +43,15 @@ public class GameController {
     }
 
     @PostMapping("/create")
-    public String createGame(Game game) {
-        gameService.save(game);
-        return "redirect:/games";
+    public String createGame(Game game, Model model) {
+        try {
+            gameService.save(game);
+            return "redirect:/games";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+            return "games/create";
+        }
+
     }
 
     @GetMapping("/delete/{id}")
